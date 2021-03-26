@@ -1,0 +1,1 @@
+bitnum = 3;nums = enumerate_binary(bitnum);nums = [nums zeros(2^bitnum,1)];for ii=1:size(nums,1)    nums(ii,end) = convert_bin2dec(nums(ii,1:(end-1)));endnums
