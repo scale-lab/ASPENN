@@ -1,4 +1,9 @@
 %% Write MNIST Images to text file
+%{
+    Writes the MNIST data set into text files. Each row represents a single
+    MNIST image. Also Writes the trained weights to text files.
+%}
+
 addpath(genpath('./dlt_cnn_map_dropout_nobiasnn'));
 load mnist_uint8;
 train_x = double(train_x) / 255;

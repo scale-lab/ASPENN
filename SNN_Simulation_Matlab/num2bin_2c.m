@@ -1,4 +1,16 @@
 function [binout] = num2bin_2c(numin, radix)
+    %{
+        Converts a floating point number to a list representing the signed, fixed-point binary
+        representation of that number.
+        Inputs:
+        - numin [float]: The number to convert.
+        - radix [2x1 integer vector]: the dimensions of the fixed point
+        representation to convert to. First entry is the total size of the
+        number, the second entry is the size of the non-integer component.
+        Outputs:
+        - binout [nx1 binary vector]: List of binary data that stores the
+        binary representation of numin in the proper radix.
+    %}
     s = sign(numin);
     n = radix(1);
     fp = radix(2);

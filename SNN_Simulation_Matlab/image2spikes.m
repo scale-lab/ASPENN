@@ -1,5 +1,17 @@
-function res = image2spikes(imgs, spike_size, timesteps, max_spikes, filename)
+function image2spikes(imgs, spike_size, timesteps, max_spikes, filename)
+    %{
+        Converts a set of MNIST images into a set of text files that
+        represents the initial spiking activity of those images.
+        Inputs:
+        - imgs [nxm float matrix]: A matrix of n images of size m. The
+        images to convert.
+        - timesteps [integer]: The number of timesteps to compute spikes
+        for.
+        - max_spikes [integer]: The size of each timestep block.
+        - filename [string]: The basic string of the output files.
+    %}
     % image2spikes(test_x(1:10,:),10,10,512,'spikeImage_')
+    
     [num_img, size_img] = size(imgs);
     
     % Zero Character Array
@@ -40,5 +52,4 @@ function res = image2spikes(imgs, spike_size, timesteps, max_spikes, filename)
         end
         fclose(fid);
     end
-    res = 1;
 end

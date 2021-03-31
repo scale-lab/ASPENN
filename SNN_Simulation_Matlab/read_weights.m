@@ -1,4 +1,13 @@
 function weights = read_weights(filename)
+    %{
+        Reads a csv text file and converts the data into a matrix
+        Inputs:
+        - filename [string]: The name of the text file to read
+        Outputs:
+        - weights [nxm matrix]: The matrix result from reading the file
+        indicated by filename.
+    %}
+
     fid = fopen(filename);
     tline = fgetl(fid);
     tsplit = split(tline, ',');

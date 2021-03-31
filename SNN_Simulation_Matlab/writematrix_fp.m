@@ -1,4 +1,15 @@
-function res = writematrix_fp(A, radix, filename)
+function writematrix_fp(A, radix, filename)
+    %{
+        Converts a float matrix into a fixed-point binary matrix and writes
+        that matrix to a file.
+        Inputs
+        - A [float matrix]: the matrix to convert and write.
+        - radix [2x1 vector]: the dimensions of the fixed point
+        representation to convert to. First entry is the total size of the
+        number, the second entry is the size of the non-integer component.
+        - filename [string]: The name of the file to write to.
+    %}
+    
     r = length(A);
     fid = fopen( filename, 'wt' );
     for ii=1:r
@@ -8,5 +19,4 @@ function res = writematrix_fp(A, radix, filename)
         fprintf( fid, '%s\n', data);
     end
     fclose(fid);
-    res = 1;
 end

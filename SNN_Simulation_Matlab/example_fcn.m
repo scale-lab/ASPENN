@@ -66,14 +66,11 @@ t_opts.max_rate     =  1000;
 
 fprintf('Starting Exact SNN Test\n');
 norm_nn_exact = nnlifsim_exact(norm_nn, test_x, test_y, t_opts);
-% norm_nn_approx = nnlifsim_approx(norm_nn, test_x, test_y, t_opts);
 fprintf('Done.\n') 
 %% Show the difference
 figure;
 plot(t_opts.dt:t_opts.dt:t_opts.duration, norm_nn_exact.performance);
 hold on; grid on;
-% plot(t_opts.dt:t_opts.dt:t_opts.duration, norm_nn_approx.performance);
-%legend('Exact Network', 'Approximate Network');
 ylim([0 100]);
 xlabel('Time [s]');
 ylabel('Accuracy [%]');

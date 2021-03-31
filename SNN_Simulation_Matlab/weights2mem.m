@@ -1,4 +1,17 @@
-function res = weights2mem(nn, radix, tile_size, matrix_size, filename)
+function weights2mem(nn, radix, tile_size, matrix_size, filename)
+    %{
+        Converts a weight matrix into a properly formatted text file that
+        represents ASPENN's Main Memory subsystem.
+        Inputs:
+        - nn [struct]: A trained SNN structure
+        - radix [2x1 integer vector]: the dimensions of the fixed point
+        representation to convert to. First entry is the total size of the
+        number, the second entry is the size of the non-integer component.
+        - tile_size [integer]: The number of neurons per tile in ASPENN.
+        - matrix_size [integer]: The number of tiles per matrix in ASPENN.
+        - filename [string]: The basic string of the output files.
+    %}
+
     layers = length(nn.W);
     for layer = 1:layers
         fid = fopen( [filename, num2str(layer), '.txt'], 'wt' );
@@ -25,5 +38,4 @@ function res = weights2mem(nn, radix, tile_size, matrix_size, filename)
         end
         fclose(fid);
     end    
-    res = 1;
 end
