@@ -1,7 +1,26 @@
 ASPENN
-Contains verilog files for generating an ASPENN circuit.
+Contains Verilog files for generating an ASPENN circuit. The important modules are listed below:
+- snn_top.v: The top level module containing the Controller unit and the Neuron Matrix. Handles data flow and index control.
+- neuron_matrix.v: The core computation unit. Contains some number of neuron tiles and directs data into and out of them.
+- neuron_tile.v: A grouping of several neurons. Performs the actual neuron computation and controls the low-level neuron operation
+- threshold_unit.v: A simple threshold circuit. Determines a neuron's spiking activity.
+- compressor.v: Part of the weight accumulator. Performs Stage 1, counter compression.
+- skew_offset_add_signed.v: Part of the weight accumulator. Performs Stages 2 and 3, block-save addition and the final CPA addition.
+- counters.v: A positive counter.
+- counters_neg.v: A negative counter.
 
-
+To synthesize on of these modules, simply follow the below steps:
+- Follow the Genus setup instructions found at: https://github.com/scale-lab/EDA-Scripts
+- Edit the primary design file with the desired parameters
+	- run the command: > genus -no_gui -batch -files rc_commands_*design*.tcl
+	- Genus metric results are found in the "genus_out_CLIFNU" directory
+	- The synthesized design file, marked with the "_syn.v" suffix, is also in the "genus_out_CLIFNU" directory
+- Verification using the iverilog simulation tool:
+	- Edit "tb_<design>.v" with the desired parameters
+	- Run pre-synthesis simulation: iverilog tb_*design*.v *design*.v
+	- Run post-synthesis simulation: iverilog tb_*design*.v *design*_syn.v gscl45nm.v
+		- Make sure to copy the synthesized file from the "genus_out_CLIFNU" directory before running a post-synthesis simulation
+	- Display simulation results: vvp a.out
 
 SNN_simulation_Cpp:
 ASPENN is emulated using a C++ emulator. This program perfectly emulates an individual neuron circuit, but has the network level data flow controlled through software. This program is used to test spiking activity and accuracy metrics for different neuron configurations, and especially the impact of approximate neuron circuits. This folder also contains the weights files for a pre-trained SNN. 
